@@ -1,4 +1,4 @@
-package hcmute.vn.repositories;
+package hcmute.vn.dao;
 
 import hcmute.vn.entities.User;
 import hcmute.vn.utils.JpaConfig;
@@ -6,11 +6,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-
 import java.util.List;
 
-public class UserRepository {
+public class UserDao implements IUserDao {
 
+    @Override
     public List<User> findAll() {
         EntityManager enma = JpaConfig.getEntityManager();
         try {
@@ -21,6 +21,7 @@ public class UserRepository {
         }
     }
 
+    @Override
     public User login(String username, String password) {
         EntityManager enma = JpaConfig.getEntityManager();
         String jpql = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password";
@@ -36,6 +37,7 @@ public class UserRepository {
         }
     }
 
+    @Override
     public boolean checkExistUsername(String username) {
         EntityManager enma = JpaConfig.getEntityManager();
         String jpql = "SELECT COUNT(u) FROM User u WHERE u.username = :username";
@@ -48,6 +50,7 @@ public class UserRepository {
         }
     }
 
+    @Override
     public boolean checkExistEmail(String email) {
         EntityManager enma = JpaConfig.getEntityManager();
         String jpql = "SELECT COUNT(u) FROM User u WHERE u.email = :email";
@@ -60,6 +63,7 @@ public class UserRepository {
         }
     }
 
+    @Override
     public void insert(User user) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -75,6 +79,7 @@ public class UserRepository {
         }
     }
 
+    @Override
     public void update(User user) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -90,10 +95,12 @@ public class UserRepository {
         }
     }
 
+    @Override
     public void updateProfile(User user) {
         update(user);
     }
 
+    @Override
     public void delete(int id) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -112,6 +119,7 @@ public class UserRepository {
         }
     }
 
+    @Override
     public User findById(int id) {
         EntityManager enma = JpaConfig.getEntityManager();
         try {

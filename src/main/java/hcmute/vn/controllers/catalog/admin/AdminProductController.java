@@ -2,8 +2,10 @@ package hcmute.vn.controllers.catalog.admin;
 
 import hcmute.vn.entities.Category;
 import hcmute.vn.entities.Product;
-import hcmute.vn.services.CategoryService;
-import hcmute.vn.services.ProductService;
+import hcmute.vn.services.CategoryServiceImpl;
+import hcmute.vn.services.ICategoryService;
+import hcmute.vn.services.IProductService;
+import hcmute.vn.services.ProductServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,8 +26,9 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/admin/product", "/admin/product/add", "/admin/product/edit", "/admin/product/delete"})
 public class AdminProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private ProductService productService = new ProductService();
-    private CategoryService cateService = new CategoryService();
+    
+    private IProductService productService = new ProductServiceImpl();
+    private ICategoryService cateService = new CategoryServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

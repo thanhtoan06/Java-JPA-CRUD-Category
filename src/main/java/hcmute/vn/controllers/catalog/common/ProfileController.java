@@ -1,7 +1,8 @@
 package hcmute.vn.controllers.catalog.common;
 
 import hcmute.vn.entities.User;
-import hcmute.vn.services.UserService;
+import hcmute.vn.services.IUserService;
+import hcmute.vn.services.UserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,7 +22,8 @@ import java.nio.file.StandardCopyOption;
 @WebServlet("/account/profile")
 public class ProfileController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private UserService userService = new UserService();
+    
+    private IUserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

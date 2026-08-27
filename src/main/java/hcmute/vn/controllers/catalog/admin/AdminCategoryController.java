@@ -1,7 +1,8 @@
 package hcmute.vn.controllers.catalog.admin;
 
 import hcmute.vn.entities.Category;
-import hcmute.vn.services.CategoryService;
+import hcmute.vn.services.CategoryServiceImpl;
+import hcmute.vn.services.ICategoryService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,7 +23,8 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/admin/category", "/admin/category/add", "/admin/category/edit", "/admin/category/delete"})
 public class AdminCategoryController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private CategoryService cateService = new CategoryService();
+    
+    private ICategoryService cateService = new CategoryServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

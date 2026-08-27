@@ -1,15 +1,15 @@
-package hcmute.vn.repositories;
+package hcmute.vn.dao;
 
 import hcmute.vn.entities.Product;
 import hcmute.vn.utils.JpaConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-
 import java.util.List;
 
-public class ProductRepository {
+public class ProductDao implements IProductDao {
 
+    @Override
     public List<Product> findAll() {
         EntityManager enma = JpaConfig.getEntityManager();
         try {
@@ -20,17 +20,16 @@ public class ProductRepository {
         }
     }
 
+    @Override
     public List<Product> search(String keyword, int cateId) {
         EntityManager enma = JpaConfig.getEntityManager();
         StringBuilder jpql = new StringBuilder("SELECT p FROM Product p WHERE 1=1");
-
         if (keyword != null && !keyword.trim().isEmpty()) {
             jpql.append(" AND p.productName LIKE :keyword");
         }
         if (cateId > 0) {
             jpql.append(" AND p.cateId = :cateId");
         }
-
         try {
             TypedQuery<Product> query = enma.createQuery(jpql.toString(), Product.class);
             if (keyword != null && !keyword.trim().isEmpty()) {
@@ -45,10 +44,12 @@ public class ProductRepository {
         }
     }
 
+    @Override
     public List<Product> searchByName(String keyword) {
         return search(keyword, 0);
     }
 
+    @Override
     public Product findById(int id) {
         EntityManager enma = JpaConfig.getEntityManager();
         try {
@@ -58,6 +59,7 @@ public class ProductRepository {
         }
     }
 
+    @Override
     public void insert(Product product) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -73,6 +75,7 @@ public class ProductRepository {
         }
     }
 
+    @Override
     public void update(Product product) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -88,6 +91,7 @@ public class ProductRepository {
         }
     }
 
+    @Override
     public void delete(int id) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();

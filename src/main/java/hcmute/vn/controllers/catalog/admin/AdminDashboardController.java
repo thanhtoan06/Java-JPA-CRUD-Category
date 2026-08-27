@@ -1,8 +1,11 @@
 package hcmute.vn.controllers.catalog.admin;
 
-import hcmute.vn.services.CategoryService;
-import hcmute.vn.services.ProductService;
-import hcmute.vn.services.UserService;
+import hcmute.vn.services.CategoryServiceImpl;
+import hcmute.vn.services.ICategoryService;
+import hcmute.vn.services.IProductService;
+import hcmute.vn.services.IUserService;
+import hcmute.vn.services.ProductServiceImpl;
+import hcmute.vn.services.UserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -11,9 +14,10 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/admin/dashboard"})
 public class AdminDashboardController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private CategoryService cateService = new CategoryService();
-    private ProductService productService = new ProductService();
-    private UserService userService = new UserService();
+    
+    private ICategoryService cateService = new CategoryServiceImpl();
+    private IProductService productService = new ProductServiceImpl();
+    private IUserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

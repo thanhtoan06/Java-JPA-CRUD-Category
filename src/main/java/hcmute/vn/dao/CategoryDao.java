@@ -1,15 +1,15 @@
-package hcmute.vn.repositories;
+package hcmute.vn.dao;
 
 import hcmute.vn.entities.Category;
 import hcmute.vn.utils.JpaConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-
 import java.util.List;
 
-public class CategoryRepository {
+public class CategoryDao implements ICategoryDao {
 
+    @Override
     public List<Category> findAll() {
         EntityManager enma = JpaConfig.getEntityManager();
         try {
@@ -20,6 +20,7 @@ public class CategoryRepository {
         }
     }
 
+    @Override
     public List<Category> searchByName(String keyword) {
         EntityManager enma = JpaConfig.getEntityManager();
         String jpql = "SELECT c FROM Category c WHERE c.cateName LIKE :keyword";
@@ -32,6 +33,7 @@ public class CategoryRepository {
         }
     }
 
+    @Override
     public Category findById(int id) {
         EntityManager enma = JpaConfig.getEntityManager();
         try {
@@ -41,6 +43,7 @@ public class CategoryRepository {
         }
     }
 
+    @Override
     public void insert(Category category) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -56,6 +59,7 @@ public class CategoryRepository {
         }
     }
 
+    @Override
     public void update(Category category) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
@@ -71,6 +75,7 @@ public class CategoryRepository {
         }
     }
 
+    @Override
     public void delete(int id) {
         EntityManager enma = JpaConfig.getEntityManager();
         EntityTransaction trans = enma.getTransaction();
